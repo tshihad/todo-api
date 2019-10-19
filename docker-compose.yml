@@ -1,0 +1,13 @@
+version: '3.0'
+services:
+  db:
+    build:
+      dockerfile: DB.Dockerfile
+      context: .
+    ports:
+      - 5432:5432
+    container_name: todo-db-cont
+    networks:
+      - todo_net
+networks:
+  todo_net:
