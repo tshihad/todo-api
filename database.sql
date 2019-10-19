@@ -13,5 +13,5 @@ CREATE TABLE todo(
 CREATE TABLE users(
     id INTEGER PRIMARY KEY,
     users_name VARCHAR(50),
-    email VARCHAR(50)
+    email VARCHAR(50) UNIQUE
 );
