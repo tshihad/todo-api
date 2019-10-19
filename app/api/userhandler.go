@@ -13,11 +13,13 @@ func (a *App) handlePostUser(w http.ResponseWriter, r *http.Request) {
 	var userid int
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		a.Error(err)
+		a.Fail(w, "invalid json format", http.StatusBadRequest)
 		return
 	}
 	userid, err := a.InsertUser(user)
 	if err != nil {
 		a.Error(err)
+		a.Fail(w, "Failed to create user", http.StatusInternalServerError)
 		return
 	}
 	user.ID = userid
@@ -29,6 +31,7 @@ func (a *App) handleGetUser(w http.ResponseWriter, r *http.Request) {
 	user, err := a.GetUser(userName)
 	if err != nil {
 		a.Error(err)
+		a.Fail(w, "Record not found", http.StatusNotFound)
 		return
 	}
 	a.Success(w, http.StatusOK, user)

@@ -21,6 +21,7 @@ func Execute() {
 func serveApp(db *gorm.DB) {
 	var wg sync.WaitGroup
 	app := api.NewApp(db)
+	wg.Add(1)
 	go func() {
 		err := http.ListenAndServe("localhost:8080", app.Router())
 		if err != nil {

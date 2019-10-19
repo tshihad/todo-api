@@ -18,9 +18,8 @@ type successResponse struct {
 }
 
 type failResponse struct {
-	Status    string `json:"status"`
-	ErrorCode int    `json:"error_code"`
-	Message   string `json:"message"`
+	Status  string `json:"status"`
+	Message string `json:"message"`
 }
 
 // Success attach response message with response writer.
@@ -42,12 +41,11 @@ func (r *Response) Success(w http.ResponseWriter, status int, data interface{}) 
 
 // Fail attach fail message along with error code in failResponse
 // struct
-func (r *Response) Fail(w http.ResponseWriter, errorCode int, message string, status int) {
+func (r *Response) Fail(w http.ResponseWriter, message string, status int) {
 	w.WriteHeader(status)
 	f := failResponse{
-		Status:    "ERROR",
-		ErrorCode: errorCode,
-		Message:   message,
+		Status:  "error",
+		Message: message,
 	}
 	out, err := json.Marshal(f)
 	if err != nil {
