@@ -9,13 +9,18 @@ func (r *repo) InsertTodo(todo models.Todo) (models.Todo, error) {
 	return todo, err
 }
 
-func (r *repo) GetTodos(todoListID int) ([]models.Todo, error) {
+func (r *repo) GetTodo(todoListID int, status int) ([]models.Todo, error) {
 	var todos []models.Todo
-	err := r.db.Where(models.Todo{TodoListID: todoListID}).Find(&todos).Error
+	err := r.db.Where(models.Todo{
+		TodoListID: todoListID,
+		Status:     status,
+	}).Find(&todos).Error
 	return todos, err
 }
 
-func (r *repo) UpdateTodo(id int) (models.Todo, error) {
-	var todo models.Todo
-	return todo, nil
+func (r *repo) UpdateTodo(id int, todo models.Todo) error {
+	return r.db.Model(todo).Where(models.Todo{ID: id}).Update(&todo).Error
+}
+func (r *repo) DeleteTodo(id int) error {
+	return r.db.Model(models.Todo{}).Delete(models.Todo{ID: id}).Error
 }

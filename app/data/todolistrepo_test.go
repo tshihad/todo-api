@@ -50,7 +50,7 @@ func Test_repo_GetTodoList(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			tt.given(mock)
-			got, err := r.GetTodoLists(tt.args.userID)
+			got, err := r.GetTodoList(tt.args.userID)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("repo.GetTodoList() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -62,7 +62,7 @@ func Test_repo_GetTodoList(t *testing.T) {
 	}
 }
 
-func Test_repo_InsertTodoLists(t *testing.T) {
+func Test_repo_InsertTodoList(t *testing.T) {
 	type args struct {
 		todoList models.TodoList
 	}
@@ -119,6 +119,7 @@ func Test_repo_InsertTodoLists(t *testing.T) {
 
 func Test_repo_UpdateTodoList(t *testing.T) {
 	type args struct {
+		id   int
 		name string
 	}
 	tests := []struct {
@@ -129,11 +130,11 @@ func Test_repo_UpdateTodoList(t *testing.T) {
 	}{
 		{
 			name: "Normal test case 1",
-			args: args{"changed name"},
+			args: args{1, "changed name"},
 			given: func(mock sqlmock.Sqlmock) {
-				qry := `UPDATE "todo_list" SET "todo_name" = $1`
+				qry := `UPDATE "todo_list" SET "todo_name" = $1 WHERE ("todo_list"."id" = $2)`
 				mock.ExpectBegin()
-				mock.ExpectExec(core.FixedFullRe(qry)).WithArgs("changed name").WillReturnResult(
+				mock.ExpectExec(core.FixedFullRe(qry)).WithArgs("changed name", 1).WillReturnResult(
 					sqlmock.NewResult(5, 1),
 				)
 				mock.ExpectCommit()
@@ -147,7 +148,7 @@ func Test_repo_UpdateTodoList(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			tt.given(mock)
-			if err := r.UpdateTodoList(tt.args.name); (err != nil) != tt.wantErr {
+			if err := r.UpdateTodoList(tt.args.id, tt.args.name); (err != nil) != tt.wantErr {
 				t.Errorf("repo.UpdateTodoList() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

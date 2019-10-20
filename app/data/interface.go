@@ -8,6 +8,7 @@ import (
 type Repo interface {
 	UserRepo
 	TodoListRepo
+	TodoRepo
 }
 
 // UserRepo user repo
@@ -18,9 +19,16 @@ type UserRepo interface {
 
 // TodoListRepo for todolist
 type TodoListRepo interface {
-	GetTodoLists(userID int) ([]models.TodoList, error)
+	GetTodoList(userID int) ([]models.TodoList, error)
 	InsertTodoList(todoList models.TodoList) (models.TodoList, error)
-	UpdateTodoList(name string) error
+	UpdateTodoList(int, string) error
 	DeleteTodoList(todoListID int) error
+}
+
+// TodoRepo todo repo
+type TodoRepo interface {
 	InsertTodo(models.Todo) (models.Todo, error)
+	GetTodo(todoListID int, status int) ([]models.Todo, error)
+	UpdateTodo(id int, todo models.Todo) error
+	DeleteTodo(int) error
 }

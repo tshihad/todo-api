@@ -11,13 +11,21 @@ import (
 )
 
 func (a *App) handlePostTodoList(w http.ResponseWriter, r *http.Request) {
+	userIDString := chi.URLParam(r, "user_id")
+	userID, err := strconv.Atoi(userIDString)
+	if err != nil {
+		a.Error(err)
+		a.Fail(w, "invalid user id format", http.StatusBadRequest)
+		return
+	}
 	var todoList models.TodoList
 	if err := json.NewDecoder(r.Body).Decode(&todoList); err != nil {
 		a.Error(err)
 		a.Fail(w, "Bad request", http.StatusBadRequest)
 		return
 	}
-	todoList, err := a.InsertTodoList(todoList)
+	todoList.UserID = userID
+	todoList, err = a.InsertTodoList(todoList)
 	if err != nil {
 		a.Error(err)
 		a.Fail(w, "Failed to create todolist", http.StatusInternalServerError)
@@ -34,7 +42,7 @@ func (a *App) handleGetTodoList(w http.ResponseWriter, r *http.Request) {
 		a.Fail(w, "invalid user id format", http.StatusBadRequest)
 		return
 	}
-	todoList, err := a.GetTodoLists(userID)
+	todoList, err := a.GetTodoList(userID)
 	if err != nil {
 		a.Error(err)
 		if err == gorm.ErrRecordNotFound {
@@ -49,12 +57,19 @@ func (a *App) handleGetTodoList(w http.ResponseWriter, r *http.Request) {
 
 func (a *App) handlePutTodoList(w http.ResponseWriter, r *http.Request) {
 	var todoListReq models.TodoListPutReq
+	id := chi.URLParam(r, "todo_list_id")
+	todoListID, err := strconv.Atoi(id)
+	if err != nil {
+		a.Error(err)
+		a.Fail(w, "invalid todolist id format", http.StatusBadRequest)
+		return
+	}
 	if err := json.NewDecoder(r.Body).Decode(&todoListReq); err != nil {
 		a.Error(err)
 		a.Fail(w, "Bad request", http.StatusBadRequest)
 		return
 	}
-	if err := a.UpdateTodoList(todoListReq.Name); err != nil {
+	if err := a.UpdateTodoList(todoListID, todoListReq.Name); err != nil {
 		if err != nil {
 			a.Error(err)
 			a.Fail(w, "Failed to update todolist", http.StatusInternalServerError)
@@ -65,7 +80,7 @@ func (a *App) handlePutTodoList(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) handleDeleteTodoList(w http.ResponseWriter, r *http.Request) {
-	id := chi.URLParam(r, "id")
+	id := chi.URLParam(r, "todo_list_id")
 	todoListID, err := strconv.Atoi(id)
 	if err != nil {
 		a.Error(err)

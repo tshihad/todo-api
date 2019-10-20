@@ -11,16 +11,18 @@ type Users struct {
 type TodoList struct {
 	ID     int    `json:"id" gorm:"column:id"`
 	Name   string `json:"name" gorm:"column:todo_name"`
-	UserID int    `json:"user_id" gorm:"column:user_id"`
+	UserID int    `json:"user_id" gorm:"column:users_id"`
 }
 
+// TodoListPutReq for todolist put request
 type TodoListPutReq struct {
 	Name string
 }
 
+// Todo model
 type Todo struct {
 	ID         int    `json:"id" gorm:"column:id"`
-	Data       string `json:"data" gorm:"column:data"`
+	Data       string `json:"data" gorm:"column:content"`
 	Status     int    `json:"status" gorm:"column:status"`
 	TodoListID int    `json:"todo_list_id" gorm:"column:todo_list_id"`
 }
