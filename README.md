@@ -15,7 +15,7 @@ Run following command will runs both database and app
 ```
 docker-compose up
 ```
-
+Postman collection can be found in docs directory
 ### Local setup
 #### Unit test
 ```
