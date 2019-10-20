@@ -9,5 +9,17 @@ services:
     container_name: todo-db-cont
     networks:
       - todo_net
+  app:
+    build:
+      dockerfile: Go.Dockerfile
+      context: .
+    ports:
+      - 8080:8080
+    container_name: todo-app-cont
+    networks:
+      - todo_net
+    depends_on:
+      - db
+    restart: on-failure:10
 networks:
   todo_net:

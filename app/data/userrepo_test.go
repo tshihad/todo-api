@@ -42,7 +42,7 @@ func Test_repo_InsertUser(t *testing.T) {
 		},
 	}
 	mock, db := core.NewSQLMock()
-	r := &repo{
+	r := &RepoImp{
 		db: db,
 	}
 	for _, tt := range tests {
@@ -93,7 +93,7 @@ func Test_repo_GetUser(t *testing.T) {
 		},
 	}
 	mock, db := core.NewSQLMock()
-	r := &repo{
+	r := &RepoImp{
 		db: db,
 	}
 	for _, tt := range tests {

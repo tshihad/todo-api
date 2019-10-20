@@ -26,11 +26,11 @@ func Test_repo_GetTodoList(t *testing.T) {
 				userID: 1,
 			},
 			given: func(mock sqlmock.Sqlmock) {
-				qry := `SELECT * FROM "todo_list"  WHERE ("todo_list"."user_id" = $1)`
+				qry := `SELECT * FROM "todo_list"  WHERE ("todo_list"."users_id" = $1)`
 				mock.ExpectQuery(core.FixedFullRe(qry)).WithArgs(1).
 					WillReturnRows(
 						sqlmock.NewRows([]string{
-							"id", "todo_name", "user_id",
+							"id", "todo_name", "users_id",
 						}).AddRow(1, "sample", 23),
 					)
 			},
@@ -44,7 +44,7 @@ func Test_repo_GetTodoList(t *testing.T) {
 		},
 	}
 	mock, db := core.NewSQLMock()
-	r := &repo{
+	r := &RepoImp{
 		db: db,
 	}
 	for _, tt := range tests {
@@ -82,7 +82,7 @@ func Test_repo_InsertTodoList(t *testing.T) {
 				},
 			},
 			given: func(mock sqlmock.Sqlmock) {
-				qry := `INSERT INTO "todo_list" ("todo_name","user_id") VALUES ($1,$2) RETURNING "todo_list"."id"`
+				qry := `INSERT INTO "todo_list" ("todo_name","users_id") VALUES ($1,$2) RETURNING "todo_list"."id"`
 				mock.ExpectBegin()
 				mock.ExpectQuery(core.FixedFullRe(qry)).WillReturnRows(
 					sqlmock.NewRows([]string{
@@ -99,7 +99,7 @@ func Test_repo_InsertTodoList(t *testing.T) {
 		},
 	}
 	mock, db := core.NewSQLMock()
-	r := &repo{
+	r := &RepoImp{
 		db: db,
 	}
 	for _, tt := range tests {
@@ -142,7 +142,7 @@ func Test_repo_UpdateTodoList(t *testing.T) {
 		},
 	}
 	mock, db := core.NewSQLMock()
-	r := &repo{
+	r := &RepoImp{
 		db: db,
 	}
 	for _, tt := range tests {
@@ -179,7 +179,7 @@ func Test_repo_DeleteTodoList(t *testing.T) {
 		},
 	}
 	mock, db := core.NewSQLMock()
-	r := &repo{
+	r := &RepoImp{
 		db: db,
 	}
 	for _, tt := range tests {

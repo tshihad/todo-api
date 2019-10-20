@@ -23,7 +23,7 @@ func serveApp(db *gorm.DB) {
 	app := api.NewApp(db)
 	wg.Add(1)
 	go func() {
-		err := http.ListenAndServe("localhost:8080", app.Router())
+		err := http.ListenAndServe("0.0.0.0:8080", app.Router())
 		if err != nil {
 			panic(err)
 		}

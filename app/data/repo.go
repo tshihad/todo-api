@@ -4,13 +4,14 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type repo struct {
+// RepoImp implements repo instance
+type RepoImp struct {
 	db *gorm.DB
 }
 
 // NewRepo new repo instance
-func NewRepo(db *gorm.DB) *repo {
-	return &repo{
+func NewRepo(db *gorm.DB) *RepoImp {
+	return &RepoImp{
 		db: db,
 	}
 }
