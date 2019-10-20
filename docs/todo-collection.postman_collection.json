@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "812edb69-97aa-44a4-81d2-f72bb6a5bcc2",
+		"name": "todo-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get-user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/app/user/shihad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"user",
+						"shihad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"shihad\",\"email\":\"dfdsdfsf\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/app/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-todolist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/app/todolist/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"todolist",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post-todolist",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\":\"task2\",\n\"user_id\":1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/app/todolist/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"todolist",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-todolist",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/app/todolist/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"todolist",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put-todolist",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\":\"new name\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/app/todolist/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"todolist",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-todo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/app/todo/6/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"todo",
+						"6",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post-todo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"data\":\"first todo\",\n\t\"status\":1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/app/todo/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"todo",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put-todo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"data\":\"something better\",\n\t\"status\":2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/app/todo/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"todo",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-todo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/app/todo/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"todo",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
