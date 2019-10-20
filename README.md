@@ -1,10 +1,21 @@
 # Simple TODO
 This is a simple todo application using postgres as database
+
+## Architecture
+Here I am using clean Architecture consists of 3 layers.
+Listing layers with implementation
+- entities ==> app/models
+- repository ==> app/data
+- usecases/api ==> app/api
+
+project structure references: https://github.com/golang-standards/project-layout
+
 ## Setting up
 Run following command will runs both database and app
 ```
 docker-compose up
 ```
+
 ### Local setup
 #### Unit test
 ```
